@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GenesiTech | Automação, Sensoriamento & IoT para o Agronegócio</title>
+  <meta name="description" content="GenesiTech — soluções de automação, sensoriamento e IoT para o agronegócio. Projetos confiáveis, dados em tempo real e integração ponta a ponta." />
+
+  <!-- Font (clean, modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --muted-2: rgba(255,255,255,.55);
+      --accent: #4aa3ff;
+      --accent-2:#9ad4ff;
+      --shadow: 0 14px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius-lg: 28px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 12%, rgba(74,163,255,.25), transparent 55%),
+        radial-gradient(900px 600px at 85% 18%, rgba(154,212,255,.16), transparent 55%),
+        radial-gradient(900px 650px at 55% 85%, rgba(74,163,255,.12), transparent 60%),
+        linear-gradient(180deg, #060b15 0%, #0b1220 45%, #070b14 100%);
+    }
+
+    a{ color: inherit; }
+    .container{
+      width: min(100% - 40px, var(--max));
+      margin: 0 auto;
+    }
+
+    /* Top bar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(6,10,18,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      text-decoration:none;
+      min-width: 240px;
+    }
+    .brand img{
+      height: 34px;
+      width: auto;
+      display:block;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    .brand .name{
+      display:flex;
+      flex-direction:column;
+      line-height: 1.05;
+    }
+    .brand .name strong{
+      font-size: .98rem;
+      letter-spacing: .2px;
+    }
+    .brand .name span{
+      font-size: .78rem;
+      color: var(--muted-2);
+    }
+    nav{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: .92rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: .2s ease;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(74,163,255,.95), rgba(154,212,255,.85));
+      color: #06101d;
+      border-color: transparent;
+      box-shadow: 0 14px 40px rgba(74,163,255,.20);
+    }
+    .btn-primary:hover{
+      background: linear-gradient(135deg, rgba(74,163,255,1), rgba(154,212,255,.95));
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 64px 0 26px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.22fr .78fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+    .hero-card{
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 34px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(700px 240px at 25% 5%, rgba(154,212,255,.22), transparent 60%),
+        radial-gradient(600px 260px at 80% 10%, rgba(74,163,255,.18), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero-card > *{ position:relative; }
+
+    .eyebrow{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      color: rgba(255,255,255,.85);
+      font-weight: 600;
+      font-size: .82rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .dot{
+      width: 10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--accent-2), var(--accent));
+      box-shadow: 0 0 0 6px rgba(74,163,255,.14);
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(2rem, 3.6vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    .lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      max-width: 62ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .trust{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+      color: var(--muted-2);
+      font-size: .92rem;
+    }
+    .trust span{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* Side card */
+    .side-card{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 10px 36px rgba(0,0,0,.28);
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .side-card:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(500px 260px at 30% 10%, rgba(74,163,255,.16), transparent 62%),
+        radial-gradient(540px 280px at 80% 30%, rgba(154,212,255,.10), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .side-card > *{ position:relative; }
+    .pill{
+      display:inline-flex;
+      width: fit-content;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+      font-weight: 600;
+      font-size: .88rem;
+    }
+    .kpi{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .kpi .row{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 14px;
+    }
+    .kpi .row strong{
+      display:block;
+      font-size: 1.02rem;
+      margin-bottom: 2px;
+    }
+    .kpi .row span{
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.45;
+    }
+
+    /* Sections */
+    .section{
+      padding: 26px 0;
+    }
+    .section-title{
+      font-size: 1.25rem;
+      letter-spacing:-.01em;
+      margin: 0 0 12px;
+    }
+    .section-sub{
+      color: var(--muted);
+      margin: 0 0 16px;
+      line-height: 1.6;
+      max-width: 86ch;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 18px;
+      min-height: 140px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, background .2s ease, border-color .2s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      letter-spacing: -.01em;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.55;
+    }
+
+    /* Two-col blocks */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .block{
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+      padding: 22px;
+      overflow:hidden;
+      position:relative;
+    }
+    .block:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(900px 260px at 15% 20%, rgba(74,163,255,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .block > *{ position:relative; }
+
+    ul.clean{
+      list-style:none;
+      padding:0;
+      margin: 10px 0 0;
+      display:grid;
+      gap: 10px;
+    }
+    ul.clean li{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    ul.clean li strong{ color: rgba(255,255,255,.88); }
+
+    /* CTA band */
+    .cta-band{
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(800px 280px at 20% 20%, rgba(154,212,255,.16), transparent 60%),
+        radial-gradient(700px 260px at 85% 35%, rgba(74,163,255,.16), transparent 60%),
+        rgba(255,255,255,.05);
+      padding: 26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      box-shadow: 0 10px 36px rgba(0,0,0,.25);
+    }
+    .cta-band h3{
+      margin:0 0 6px;
+      font-size: 1.2rem;
+      letter-spacing:-.01em;
+    }
+    .cta-band p{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 70ch;
+    }
+
+    /* Footer */
+    footer{
+      padding: 34px 0 46px;
+      color: var(--muted-2);
+      font-size: .92rem;
+    }
+    .footer-inner{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 18px;
+    }
+    .footer-inner a{ color: var(--muted); text-decoration:none; }
+    .footer-inner a:hover{ color: var(--text); }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr; }
+      .two-col{ grid-template-columns: 1fr; }
+      nav{ display:none; }
+      .brand{ min-width: unset; }
+      .cta-band{ flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top" aria-label="GenesiTech">
+        <img src="logo.png" alt="GenesiTech Logo">
+        <div class="name">
+          <strong>GenesiTech</strong>
+          <span>Automação · Sensoriamento · IoT</span>
+        </div>
+      </a>
+
+      <nav aria-label="Navegação">
+        <a href="#solucoes">Soluções</a>
+        <a href="#segmentos">Segmentos</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://wa.me/5500000000000" target="_blank" rel="noopener">
+        Entrar em contato
+      </a>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow"><span class="dot"></span> tecnologia aplicada ao agronegócio</div>
+          <h1>Automação e dados confiáveis para decisões melhores no campo.</h1>
+          <p class="lead">
+            A <strong>GenesiTech</strong> desenvolve soluções de <strong>automação</strong>, <strong>sensoriamento</strong> e <strong>IoT</strong>
+            para operações que exigem estabilidade, monitoramento contínuo e integração prática — do chão de fábrica ao ambiente rural.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contato">Falar com a GenesiTech</a>
+            <a class="btn" href="#solucoes">Ver soluções</a>
+          </div>
+
+          <div class="trust" aria-label="Pilares">
+            <span>✅ Projeto ponta a ponta</span>
+            <span>✅ Instalação e suporte</span>
+            <span>✅ Integração com sistemas</span>
+            <span>✅ Operação simples</span>
+          </div>
+        </div>
+
+        <aside class="side-card" aria-label="Resumo">
+          <div class="pill">📌 O que entregamos</div>
+          <div class="kpi">
+            <div class="row">
+              <strong>Monitoramento em tempo real</strong>
+              <span>Dados contínuos e alertas rápidos para reduzir perdas e aumentar previsibilidade.</span>
+            </div>
+            <div class="row">
+              <strong>Automação que funciona</strong>
+              <span>Controle e integração com foco em robustez, simplicidade e segurança operacional.</span>
+            </div>
+            <div class="row">
+              <strong>Experiência no agro</strong>
+              <span>Equipe com anos de vivência em avicultura, suinocultura e gado de leite — no Brasil e no exterior.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="solucoes">
+      <div class="container">
+        <h2 class="section-title">Soluções</h2>
+        <p class="section-sub">
+          Construímos sistemas sob medida para sua realidade: sensores, controladores, painéis, conectividade e integrações —
+          com foco em confiabilidade, padrão profissional e fácil operação.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Monitoramento & Alertas</h3>
+            <p>
+              Temperatura, umidade, energia e outros indicadores críticos com alertas imediatos e histórico para análise.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Automação de Processos</h3>
+            <p>
+              Acionamentos, rotinas e lógicas de controle para reduzir trabalho manual e manter padrão de operação.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Integração & IoT</h3>
+            <p>
+              Integramos dados ao seu endpoint/sistema (quando necessário) e desenhamos a arquitetura ideal para o seu cenário.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="segmentos">
+      <div class="container">
+        <div class="two-col">
+          <div class="block">
+            <h2 class="section-title">Segmentos atendidos</h2>
+            <p class="section-sub" style="margin-bottom:0;">
+              Atuação focada no agronegócio e operações técnicas com alta exigência de confiabilidade.
+            </p>
+            <ul class="clean">
+              <li><strong>Avicultura</strong> — controle, sensoriamento e padronização de processos.</li>
+              <li><strong>Suinocultura</strong> — monitoramento e automação para estabilidade operacional.</li>
+              <li><strong>Gado de leite</strong> — soluções de monitoramento e alertas para rotinas críticas.</li>
+            </ul>
+          </div>
+
+          <div class="block">
+            <h2 class="section-title">Como trabalhamos</h2>
+            <p class="section-sub" style="margin-bottom:0;">
+              Um processo simples, com clareza desde o diagnóstico até a operação.
+            </p>
+            <ul class="clean">
+              <li><strong>1) Diagnóstico</strong> — entendemos seu cenário, metas e pontos críticos.</li>
+              <li><strong>2) Projeto</strong> — definimos arquitetura, sensores, painéis e integrações.</li>
+              <li><strong>3) Implementação</strong> — instalação, testes e calibração em campo.</li>
+              <li><strong>4) Operação</strong> — treinamento, suporte e evolução contínua.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <h2 class="section-title">Diferenciais</h2>
+        <p class="section-sub">
+          O objetivo é simples: entregar tecnologia que resolve — com estabilidade, padrão e atenção aos detalhes.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Confiabilidade</h3>
+            <p>Projetos pensados para rotina real: robustez, proteção e estabilidade no dia a dia.</p>
+          </div>
+          <div class="card">
+            <h3>Experiência prática</h3>
+            <p>Vivência em operações do agro e histórico profissional em ambientes de alta escala.</p>
+          </div>
+          <div class="card">
+            <h3>Entrega completa</h3>
+            <p>Da ideia ao funcionamento: arquitetura, hardware, integração, testes e suporte.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h3>Quer conversar sobre seu projeto?</h3>
+            <p>
+              Clique no botão e fale direto com a GenesiTech no WhatsApp. Se preferir, podemos agendar uma conversa técnica para
+              entender seu cenário e sugerir o melhor caminho.
+            </p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="https://wa.me/5500000000000" target="_blank" rel="noopener">
+              WhatsApp · Entrar em contato
+            </a>
+            <a class="btn" href="#top">Voltar ao topo</a>
+          </div>
+        </div>
+
+        <p style="margin-top:12px; color: var(--muted-2); font-size:.9rem;">
+          Ajuste o número do WhatsApp no link <code style="background:rgba(255,255,255,.06); padding:2px 6px; border-radius:8px; border:1px solid rgba(255,255,255,.10);">wa.me</code>
+          (ex.: <span style="color:rgba(255,255,255,.78);">https://wa.me/5547999999999</span>).
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <div style="font-weight:700; color: rgba(255,255,255,.88);">GenesiTech</div>
+          <div style="margin-top:6px;">Automação · Sensoriamento · IoT para o Agronegócio</div>
+          <div style="margin-top:10px;">© 2025 · Todos os direitos reservados</div>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;">
+          <a href="#solucoes">Soluções</a>
+          <a href="#segmentos">Segmentos</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
