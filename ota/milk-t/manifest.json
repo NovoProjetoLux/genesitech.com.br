@@ -1,0 +1,16 @@
+{
+  "product": "milk-t",
+  "product_name": "Milk Monitor - Temperatura",
+  "version": "1.0.0",
+  "url": "https://novoprojetolux.github.io/ota/milk-t/firmware.bin",
+  "sha256": "",
+  "file_size_bytes": 0,
+  "channel": "stable",
+  "rollout_percentage": 100,
+  "allow_devices": [],
+  "block_devices": [],
+  "min_version": "1.0.0",
+  "force_update": false,
+  "release_notes": "Milk-T Monitor de Temperatura - Versão inicial",
+  "release_date": "2025-01-10"
+}
